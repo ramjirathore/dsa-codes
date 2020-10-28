@@ -1,0 +1,10 @@
+1. (a + b) % m = (a % m + b % m) % m
+2. (a - b) % m = (a % m - b % m + m) % m
+3. (a * b) % m = ((a % m) * (b % m)) % m
+4. (a / b) % m = ((a % m) - (b inv1 % m)) % m
+
+inverse: 
+for ex -
+(6 * y) % 7 = 1
+
+here y is inverse which is equal to 6
