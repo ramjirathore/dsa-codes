@@ -7,11 +7,13 @@ int linear_search(int arr[], int n, int key) {
 		return -1;
 	}
 
-	// recurence case
+	// recurence case(here doing two things)
+	// --first checking for current index
 	if (arr[0] == key) {
 		return 0;
 	}
 
+	// --then making call to remaining part
 	int i = linear_search(arr + 1, n - 1, key);
 	if (i == -1) {
 		return -1;
