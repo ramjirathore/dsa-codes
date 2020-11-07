@@ -23,11 +23,10 @@ int linear_search(int arr[], int n, int key) {
 }
 
 int main() {
-	int arr[] = {1, 2, 5, -2, 11, 14, 28};
+	int arr[] = {1, 2, 5, -2, 7, 11, 14, 7, 28};
 	int n = sizeof(arr) / sizeof(int);
 
-	int key;
-	cin >> key;
+	int key = 7;
 
 	cout << linear_search(arr, n, key);
 }
