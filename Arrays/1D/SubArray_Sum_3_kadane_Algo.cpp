@@ -8,7 +8,7 @@ int main() {
 	int arr[n];
 
 	int cs = 0;
-	int ms = 0;
+	int ms = INT_MIN;
 
 	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
