@@ -16,11 +16,10 @@ int main() {
 
 	for (int i = 0; i < n; i++) {
 		cs += arr[i];
+		ms = max(cs, ms); // This must be first otherwise it will give 0 for only negative values
 		if (cs < 0) {
 			cs = 0;
 		}
-
-		ms = max(cs, ms);
 	}
 
 	cout << "max Subarray sum is" << ms;
