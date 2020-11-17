@@ -6,7 +6,7 @@ int main() {
 
 	cin >> n;
 	int arr[n];
-
+	
 	int cs = 0;
 	int ms = INT_MIN;
 
@@ -17,7 +17,7 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		cs += arr[i];
 		ms = max(cs, ms); // This must be first otherwise it will give 0 for only negative values
-		if (cs < 0) {
+		if (cs < 0) { // reset if cs becomes negative
 			cs = 0;
 		}
 	}
