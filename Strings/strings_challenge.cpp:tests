@@ -1,8 +1,0 @@
-[
-	{
-		"test": "3\n12 23 43\n87 45 46\n67 10 98\n2\nfalse\nnumeric\n"
-	},
-	{
-		"test": "3\n12 23 43\n87 45 46\n67 10 98\n2\nfalse\nlexico\n"
-	}
-]
