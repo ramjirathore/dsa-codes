@@ -34,22 +34,46 @@ void insertAtHead(node* &head, int d) {
 	head = n;
 }
 
+void insertAtTail(node* &head, int d) {
+	node *n = new node(d);
+
+	if (head == NULL) {
+		head = n;
+		return;
+	}
+
+	node *tail = head;
+
+	// reach the end 
+	while (tail->next != NULL) {
+		tail = tail -> next;
+	}
+
+	tail -> next = n;
+}
+
+
 // passing head pointer by value
 void  print(node *head) {
-	while(head!=NULL) {
-		cout<<head->data<<" -> ";
+	while (head != NULL) {
+		cout << head->data << " -> ";
 		head = head -> next;
 	}
+	cout<<endl;
 }
 
 
 int main() {
 	node *head = NULL;
 
-	insertAtHead(head, 3);
+	insertAtHead(head, 5);
 	insertAtHead(head, 2);
 	insertAtHead(head, 1);
 	insertAtHead(head, 0);
+
+	print(head);
+
+	insertAtTail(head, 7);
 
 	print(head);
 
