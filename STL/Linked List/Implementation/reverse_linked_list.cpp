@@ -119,12 +119,11 @@ node* recReverse(node* head) {
 	node *shead = recReverse(head->next); // small head
 
 	node *temp = head -> next; // OR you can skip this
-	
-	head -> next =  NULL; // AND write directly head->next->next = NULL;
-	temp -> next = head;
+	temp -> next = head; // make it right to left | ( AND write directly head->next->next = head )
+	head -> next =  NULL; // its last now so make it null
 
 	return shead;
-}
+} 
 
 
 int main() {
