@@ -98,6 +98,7 @@ void  print(node *head) {
 
 /**********end of Previous code*************/
 
+// Linear Search
 bool search(node* head, int key) {
 
 	node *temp = head;
@@ -113,6 +114,18 @@ bool search(node* head, int key) {
 	return false;
 }
 
+// recursive
+bool searchRecursive(node* head, int key) {
+	if(head == NULL) {
+		return false;
+	}
+
+	if(head->data == key) {
+		return true;
+	}
+
+	return searchRecursive(head->next,key);
+}
 
 int main() {
 	node *head = NULL;
@@ -133,7 +146,7 @@ int main() {
 
 /*** end *****/
 
-	if(search(head, 2)) {
+	if(searchRecursive(head, 8)) {
 		cout<<"element found";
 	} else {
 		cout<<"element not found";
