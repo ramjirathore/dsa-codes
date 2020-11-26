@@ -129,6 +129,8 @@ void deleteTail(node* &head) {
 	tail = prev;
 }
 
+
+
 int main() {
 	node *head = NULL;
 
