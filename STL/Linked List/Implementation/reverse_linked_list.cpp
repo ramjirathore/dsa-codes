@@ -66,11 +66,12 @@ istream& operator>>(istream &is, node* &head) {
 /************end of prev code **********/
 
 
+// O(N) time And O(1) space (stack)
 void reverse(node* &head) {
-	node *curr = head, *prev = NULL;	
+	node *curr = head, *prev = NULL;
 	node *n;
 
-	while(curr!=NULL) {
+	while (curr != NULL) {
 		// save the next node
 		n = curr->next;
 
@@ -86,15 +87,59 @@ void reverse(node* &head) {
 	head = prev;
 }
 
+// This is O(N*N) and O(N) stack space ---- (N due to recursion and N due to loop)
+// node* recReverse(node* &head) {
+// 	// if one node or no node then return
+// 	if (head->next == NULL or head == NULL) {
+// 		return head;
+// 	}
+
+// 	node *shead = recReverse(head->next); // small head
+
+// 	node *temp = shead;
+// 	while (temp->next != NULL) {
+// 		temp = temp -> next;
+// 	}
+
+// 	head -> next =  NULL;
+// 	temp -> next = head;
+
+// 	return shead;
+// }
+
+// OPTIMIZATION -> the last node of small linked list is basically head->next
+// O(N) time and O(N) stack space
+node* recReverse(node* &head) {
+	// small linked list
+	if (head->next == NULL or head == NULL) {
+		return head;
+	}
+
+	// rec case
+	node *shead = recReverse(head->next); // small head
+
+	node *temp = head -> next; // OR you can skip this
+	
+	head -> next =  NULL; // AND write directly head->next->next = NULL;
+	temp -> next = head;
+
+	return shead;
+}
+
+
 int main() {
 
 	node *head;
-	cin>>head;
-	cout<<head;
+	cin >> head;
+	cout << head;
 
-	reverse(head);
+	// reverse(head);
+	head = recReverse(head);
 
-	cout<<head;
+	cout << head;
+
+	// CONCLUSION - Best way to reverse is iterative one 
+	// due to O(N) time and O(1) space
 
 	return 0;
 }
