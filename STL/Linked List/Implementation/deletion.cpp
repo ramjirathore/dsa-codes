@@ -130,6 +130,24 @@ void deleteTail(node* &head) {
 }
 
 
+void deleteInMiddle(node* &head, int p) {
+	if(head == NULL or p == 1) {
+		deleteHead(head);
+	} else if(p == length(head)) {
+		deleteTail(head);
+	} else {
+		int jump = 1;
+		node *prev = head;
+		while(jump <= p-2) {
+			prev = prev -> next;
+			jump++;
+		}
+
+		node *temp = prev->next;
+		prev->next = temp -> next;
+		delete temp;
+	}
+}
 
 int main() {
 	node *head = NULL;
@@ -153,6 +171,9 @@ int main() {
 	print(head);
 
 	deleteTail(head);
+	print(head);
+
+	deleteInMiddle(head, 3);
 	print(head);
 
 	return 0;
