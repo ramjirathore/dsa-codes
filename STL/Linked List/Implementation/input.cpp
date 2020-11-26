@@ -61,9 +61,32 @@ void takeInput(node* &head) {
 	}
 }
 
-int main() {
+node* takeInput2() {
 	node *head = NULL;
-	takeInput(head);
+
+	int d;
+	cin>>d;
+
+	while(d!=-1) {
+		insertAtHead(head, d);
+		cin>>d;
+	}
+
+	return head;
+}
+
+
+// NOTE -
+// if you want to read from file
+// Just do 
+// while(cin>>d) {
+//	insertAtHead(head, d);
+// }
+
+
+
+int main() {
+	node *head = takeInput2();
 
 	print(head);
 
