@@ -110,6 +110,24 @@ void deleteHead(node* &head) {
 	head = temp;
 }
 
+void deleteTail(node* &head) {
+
+	if(head == NULL) {
+		return;
+	}
+
+	node *prev = head;
+	while(prev->next->next != NULL) {
+		prev = prev -> next;
+	}
+
+	node *tail = prev->next;
+	prev->next = NULL;
+
+	delete tail;
+
+	tail = prev;
+}
 
 int main() {
 	node *head = NULL;
@@ -130,6 +148,9 @@ int main() {
 	/**** end of previous code ***/
 
 	deleteHead(head);
+	print(head);
+
+	deleteTail(head);
 	print(head);
 
 	return 0;
