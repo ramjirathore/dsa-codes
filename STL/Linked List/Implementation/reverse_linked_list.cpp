@@ -109,7 +109,7 @@ void reverse(node* &head) {
 
 // OPTIMIZATION -> the last node of small linked list is basically head->next
 // O(N) time and O(N) stack space
-node* recReverse(node* &head) {
+node* recReverse(node* head) {
 	// small linked list
 	if (head->next == NULL or head == NULL) {
 		return head;
