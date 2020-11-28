@@ -61,6 +61,7 @@ ostream& operator<<(ostream &os, node* head) {
 
 /************end of prev code **********/
 
+// Only detection
 bool detectCycle(node *head) {
 	node *slow = head;
 	node *fast = head;
@@ -75,24 +76,83 @@ bool detectCycle(node *head) {
 	return false;
 }
 
+////*************************/////
+
+// We found meeting point 
+// then moving the remaining distance 
+// Crux: which is same from head to n and meet to n 
+node* removeCycle(node* &head, node* meetPtr) {
+	
+	node *slow = head;
+	node *fast = meetPtr;
+
+	while(fast->next!=slow->next) { // Next Meet at n node + we find prev too
+		slow = slow->next;
+		fast = fast->next;
+	}
+
+	// make the prev to NULL
+	fast->next = NULL;
+}
+
+
+// Detection and Removal
+bool detectAndRemoveCycle(node *head) {
+	node *slow = head;
+	node *fast = head;
+
+	while (fast != NULL && fast->next != NULL) {
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast) {
+			removeCycle(head, slow);
+			return true;
+		}
+	}
+	return false;
+}
 
 int main() {
 
 	node *head = NULL;
+	insertAtHead(head, 7);
+	insertAtHead(head, 6);
 	insertAtHead(head, 5);
+	insertAtHead(head, 4);
 	insertAtHead(head, 3);
 	insertAtHead(head, 2);
 	insertAtHead(head, 1);
-	insertAtHead(head, 4);
 
 	// creating a loop for testing
-	head->next->next->next->next = head->next;
+	// head->next->next->next->next->next->next->next = head->next->next;
 
-	 if(detectCycle(head)) {
-	 	cout<<"Cycle Detected";
-	 } else {
+	if(detectAndRemoveCycle(head)) {
+		cout<<"Cycle Detected and Removed"<<endl;
+		cout<<head;
+	} else {
 	 	cout<<"Cycle Not Detected";
-	 }
+	}
 
 	return 0;
 }
+
+
+// 1 -> 2 -> 3 -> 4
+//          /      \
+//         7 <-6 <- 5
+
+// FLOYD REMOVAL:
+// 1st meet: 6
+// Break the distance at the meet and at cycle point (n)
+// head to n: x
+// n to meet: y
+// meet to n: z
+
+// ** Acc to floyd x=z
+// Prove: 
+// (Till meet)
+// fast has travelled: x+2y+z
+// slow has travelled: x+y
+// till then : fast = 2*slow (speed)
+// => x+2y+z = 2x+2z
+// x=z Proved!
