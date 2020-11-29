@@ -56,6 +56,7 @@ node* getNode(node *head, int data) {
 		temp = temp->next;
 	}
 
+	// for last node
 	if (temp->data == data) {
 		return temp;
 	}
