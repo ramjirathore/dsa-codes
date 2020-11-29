@@ -30,14 +30,58 @@ int main() {
 
 	// using iterator
 	for (auto it = l2.begin(); it != l2.end(); it++) {
-		cout << *it << "-->";
+		cout << *it << " --> ";
 	}
 
 	cout << endl;
+
+
+	// some more functions
+	l2.push_back("orange");
+	l2.push_back("lemon");
+	l2.push_back("lemon");
+
 
 	// iterate and print list
 	for (string s : l2) {
 		cout << s << "->";
 	}
+
+	string str;
+	// cin>>str;
+
+	// remove a string(its all occurences)
+	// l2.remove(str);
+
+	cout << endl;
+	// iterate and print list
+	for (string s : l2) {
+		cout << s << "->";
+	}
+
+	cout<<endl;
+	// erase one or more element based on index
+	auto it = l2.begin();
+	it++;
+	it++;
+
+	l2.erase(it);
+
+	for (string s : l2) {
+		cout << s << "->";
+	}
+
+	cout<<endl;
+
+	it = l2.begin();
+	it++;
+	l2.insert(it, "FruitJuice");
+
+
+	for (string s : l2) {
+		cout << s << "->";
+	}
+
+	return 0;
 
 }
