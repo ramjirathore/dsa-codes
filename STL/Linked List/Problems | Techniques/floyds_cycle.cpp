@@ -125,7 +125,7 @@ int main() {
 	insertAtHead(head, 1);
 
 	// creating a loop for testing
-	// head->next->next->next->next->next->next->next = head->next->next;
+	head->next->next->next->next->next->next->next = head->next->next;
 
 	if(detectAndRemoveCycle(head)) {
 		cout<<"Cycle Detected and Removed"<<endl;
