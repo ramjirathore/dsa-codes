@@ -8,7 +8,7 @@
 
 
 
-// Brute force - O(N*N) time and O(1) space
+// Brute force - O(Nlogns) time and O(1) space
 // => Sort the array and then compare adjacent elements
 class Solution {
 public:
