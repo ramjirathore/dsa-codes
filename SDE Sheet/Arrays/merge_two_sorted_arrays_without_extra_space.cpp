@@ -50,3 +50,58 @@ void merge(int arr1[], int arr2[], int n, int m)
 		}
 	}
 } 
+
+
+
+
+
+// OPTIMAL - (Intution - Shell Sort) - O((n+m)log(n+m)) time and O(1) space
+// find gap = ceil(n+m)/2.0)
+// then check the (current el) is greater than (current + gap) element 
+// if yes then swap 
+// repeat for all the pairs
+
+// half the gap and then repeat the whole process until gap becomes zero
+
+int nextGap(int gap)
+{
+    if (gap <= 1)
+        return 0;
+    return (gap / 2) + (gap % 2);
+}
+
+void merge(int arr1[], int arr2[], int n, int m) 
+{ 
+    int gap = nextGap(n+m);
+    int i, j;
+
+    while(gap>0) {
+        // comparing in first array
+        for(i=0; i + gap < n; i++) {
+            if(arr1[i] > arr1[i+gap]) {
+                swap(arr1[i], arr1[i+gap]);
+            }
+        }
+        
+        // comparing in both arrays
+        for(j = gap > n ? gap - n : 0; i<n && j<m; i++, j++) {
+            if(arr1[i] > arr2[j]) {
+                swap(arr1[i], arr2[j]);
+            }
+        }
+        
+        //comparing in second array
+        if(j<m) {
+                for(j=0; j+gap < m; j++) {
+                    if(arr2[j] > arr2[j+gap]) {
+                        swap(arr2[j], arr2[j+gap]);
+                }
+            }
+        }
+        
+        gap = nextGap(gap);
+    }
+    
+} 
+
+
