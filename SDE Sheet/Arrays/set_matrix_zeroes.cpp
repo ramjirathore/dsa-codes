@@ -45,3 +45,37 @@ public:
         }
     }
 };
+
+
+
+// BETTER - O((n*m)) time and O(n+m) space
+// Take two auxillary arrays row and col
+// set corresponding index to zero in required aux array 
+// whenever a val is zero.
+// Traverse then and put that whole col/row if zero found at that index in any aux array
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+       int row = matrix.size(), col = matrix[0].size(); 
+        vector<int> rows(row, -1); 
+        vector<int> cols(col, -1);
+        
+        for(int i=0; i<row; i++) {
+            for(int j=0; j<col; j++) {
+                if(matrix[i][j] == 0) {
+                    rows[i] = 0;
+                    cols[j] = 0;
+                }
+            }
+        }
+        
+       for(int i=0; i<row; i++) {
+           for(int j = 0; j<col; j++) {
+               if(rows[i] == 0 || cols[j] == 0) {
+                   matrix[i][j] = 0;
+               }
+           }
+       }
+    }
+};
