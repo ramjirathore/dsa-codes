@@ -17,7 +17,7 @@
 // Solution - https://www.youtube.com/watch?v=6FLvhQjZqvM&list=PLgUwDviBIf0rPG3Ictpu74YWBQ1CaBkm2&index=8
 
 
-// Optimal - O(n*n) time and O(1) space
+// Optimal - O(n*n) time and O(n*n) space
 // All outside values are 1 so initilaze them as 1
 // Inner values = j-1 val prev row + j prev row
 
@@ -40,3 +40,31 @@ public:
         return pascal;
     }
 }; 
+
+
+// Variations - 
+
+//1. We are given row no. and col no. 
+// and we have to find value in pascal triangle according to given row and column.
+
+// Solution - O(n) time and O(1) space
+// Basically we can find binomial its coeffcient 
+// r-1
+//    C     
+//     c-1
+
+// So basically for finding factorial - O(n) time 
+
+
+
+//2. We are given row no. only and asked that row to return of pascal's triangle.
+
+// Solution - O(n) and O(n) space
+// for ex - given r = 5
+// [4C0 4C1 4C2 4C3 4C4] will be ans row
+// But we can use prev val everytime and just multiply 
+
+// ie 4C1 = 4/1 
+// then 4C2 can be calculated by 3*(4)/2*(1)
+// similarly for others 
+// thus achieving O(n) time
