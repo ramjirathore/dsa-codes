@@ -68,3 +68,18 @@ public:
 // then 4C2 can be calculated by 3*(4)/2*(1)
 // similarly for others 
 // thus achieving O(n) time
+
+
+// Does not pass for higher values - cross check it 
+vector<ll> nthRowOfPascalTriangle(int n) {
+        vector<ll> row(n);
+        row[0] = 1;
+        
+        ll res = 1;
+        for(int i=1; i<n; i++) {
+            res = res*(n-i)/i;
+            row[i] =  res;
+        }
+        
+        return row;
+    }
