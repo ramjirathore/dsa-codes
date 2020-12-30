@@ -7,7 +7,7 @@
 
 // Two variations ->
 // Link (Leetcode) - https://leetcode.com/problems/search-a-2d-matrix/
-// Link (GFG) - https://www.geeksforgeeks.org/search-in-row-wise-and-column-wise-sorted-matrix/
+// Link (GFG) - https://practice.geeksforgeeks.org/problems/search-in-a-matrix17201720/1
 
 // Solution - https://www.youtube.com/watch?v=ZYpYur0znng&list=PLgUwDviBIf0rPG3Ictpu74YWBQ1CaBkm2&index=13
 
@@ -33,4 +33,42 @@ public:
         return false;
     }
 };
- 
+
+
+// BETTER (though OPTIMAL for GFG) - O(n+m)) time and O(1) space
+// Note - Problem states every row and every column is sorted
+// (But that doesn't mean its always linearly sorted if put in one line)
+
+// Start from the last column of first row
+// check if target < current val 
+// if yes move back one step in same row
+// else move down one step in same column
+
+// if any time you got out of matrix => not present
+
+class Solution{
+public:	
+	int matSearch (vector <vector <int>> &mat, int N, int M, int X)
+	{
+        int i = 0;
+        int j = M-1;
+        
+        while(i<N && j>=0) {
+            if(mat[i][j] == X) {
+                return 1;
+            } else if (mat[i][j] > X) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        
+        return 0;
+	}
+};
+
+
+
+
+
+// OPTIMAL
