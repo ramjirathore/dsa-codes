@@ -15,7 +15,7 @@
 
 
 
-// BETTER - O(n) time and O(n) space
+// BETTER - O(n) time if freq array used or O(nlogn) time if used hashmap |  O(n) space
 // Use a hashmap(precisely unordered map) to count occurences of each element
 // if it any point the count becomes more than floor of n/2 
 // Return the element
