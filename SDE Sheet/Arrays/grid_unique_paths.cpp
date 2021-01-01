@@ -72,3 +72,48 @@ public:
         
     }
 };
+
+
+// OPTIMAL -(Combinatorics Approach) - O(n) or O(m) time and O(1) space
+
+// ## Just observe with an example understand it superbly.
+// for ex take m =2, n=3 then try watching writing down all the paths.
+// You'll see something
+
+// so we get unique paths as 
+// R R B
+// R B R
+// B R R
+
+// Observation1 -> Total paths are: 3 ...(m+n-2 ..explained below)
+// Observation2 -> 
+// from above example
+// No. of right directions we take (in any case) = 2 ...(n-1)
+// No. of down directions we take (in any case) = 1 ...(m-1) 
+// So total paths we take =  (m-1 + n-1) which is (m+n-2)
+// => total path always are m+n-2
+
+
+// Ultimately we need to fill three boxes -> _ _ _
+// if we choose our two rightward directions = 3C2 = 3
+// or if we choose our one downward direction = 3C1 = 3
+
+// #imp - we can choose only either right or down at one time because rest automatically gets fixed
+class Solution {
+public:    
+    int uniquePaths(int m, int n) {
+        int N = (m+n-2); // Total no. of paths
+        
+        // choosing downward direction 
+        int r = (m-1); // (rightward could also be chosen in its place)
+        
+        // calculating N(C)r
+        double res = 1;
+        for(int i=1; i<=r; i++) {
+            // if writing res * = ...don't forget to typecast
+            res = res * (N-r+i) / i;
+        }
+        
+        return (int)res;
+    }
+};
