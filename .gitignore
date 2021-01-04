@@ -2,3 +2,4 @@
 !*/
 !*.*
 *.cpp:tests*
+*a.out
