@@ -11,7 +11,7 @@
 
 
 // BRUTE FORCE - O(n*n) time and O(1) space
-// Traverse for each element and check for target sum
+// Traverse for each element and check in right its half for target sum
 // return the answer
 
 class Solution {
@@ -39,7 +39,7 @@ public:
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        map<int, int> mp;
+        unordered_map<int, int> mp;
         
         for(int i=0; i<nums.size(); i++) {
             mp[nums[i]] = i; 
@@ -56,3 +56,26 @@ public:
     }
 };
 
+
+// Optimal - (one pass iteration) - O(n) time and O(n) space 
+// Create a hashmap and then start traversing
+// check if (target - curr num) is there 
+// if yes then return boths' indices
+// else store the current val and index
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+      
+        for(int i=0; i<nums.size(); i++) {
+            
+            if( mp.find(target-nums[i])!= mp.end()) {
+                return {mp[target-nums[i]], i};
+            }
+            
+            mp[nums[i]] = i;    
+        }
+        
+        return {};
+    }
+};
