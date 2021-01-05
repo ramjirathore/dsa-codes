@@ -31,4 +31,28 @@ public:
     }
 };
 
+// Better - (Two pass iteration) - O(n) time and O(n) space 
+// Create a hashmap and store the number and its index
+// Traverse again and check if (target - curr num) is there and its not the current index onlu
+// if yes then return boths' indices
+// else at the end return empty array
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int, int> mp;
+        
+        for(int i=0; i<nums.size(); i++) {
+            mp[nums[i]] = i; 
+        }
+        
+        for(int i=0; i<nums.size(); i++) {
+            auto it = mp.find(target-nums[i]);
+            if( it!= mp.end() && it->second !=i) {
+                return {i, it->second};
+            }
+        }
+        
+        return {};
+    }
+};
 
