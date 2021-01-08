@@ -3,6 +3,17 @@
 using namespace std;
 
 // SPOJ Question
+// Constraints - 
+// n - 10^6
+// k - 10^5
+// 0 <= a[i] <= 10^6
+
+
+// Brute force - O(nk) time 
+// Traverse the whole array by shifting i to i+k 
+
+
+// OPTIMAL - O(n) time 
 
 int main() {
 	int n;
