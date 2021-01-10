@@ -35,15 +35,17 @@ node* buildTree() {
 	return root;
 }
 
-// Iterative approach
-void printLevel(node *root) {
+// Iterative approach - O(n) time and O(n) space
+// O(n) time to traverse the whole queue
+// O(n) space for the queue
+void printLevelIterative(node *root) {
 	if(root == NULL) return;
 
-	queue<node*> q;
+	queue<node*> q; // O(n) space
 
 	q.push(root);
 
-	while(!q.empty()) {
+	while(!q.empty()) { // O(n) time
 		node *temp = q.front();
 		cout<<temp -> data<<" ";
 		q.pop();
@@ -57,10 +59,54 @@ void printLevel(node *root) {
 }
 
 
+int height(node *root) {
+	if(root==NULL) return 0;
+
+	int lSubTree = height(root->left);
+	int rSubTree = height(root->right);
+
+	return max(lSubTree, rSubTree) + 1;
+}
+
+void printKthLevel(node *root, int level) {
+	if(root == NULL) return;
+
+	if(level == 1) {
+		cout<<root->data<<" ";
+	}
+
+	printKthLevel(root->left, level-1);
+	printKthLevel(root->right, level-1);
+}
+
+
+// Recursive Approach - O(n*n) time and O(n) space
+// For a skew tree of height n-> 
+// You will traverse each level so 1 + 2 + 3 ... + n
+// Thus O(n2) time
+// and O(n) recursive stack space
+
+void printLevelOrderRec(node *root) {
+	int H = height(root);
+
+	for(int k=1; k<=H; k++) {
+		printKthLevel(root, k);
+		cout<<endl;
+	}
+}
+
+
 int main() {
 	node *root = buildTree();
 	
-	printLevel(root);
+	cout<<"Level order Iterative:"<<endl;
+	printLevelIterative(root);
+
+	cout<<endl;
+	cout<<endl;
+
+	cout<<"Level order Recursive:"<<endl;
+	printLevelOrderRec(root);
 	
 	return 0;
 }
