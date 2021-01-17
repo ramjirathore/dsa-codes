@@ -35,29 +35,6 @@ node* buildTree() {
 	return root;
 }
 
-// Iterative approach - O(n) time and O(n) space
-// O(n) time to traverse the whole queue
-// O(n) space for the queue
-void printLevelIterative(node *root) {
-	if(root == NULL) return;
-
-	queue<node*> q; // O(n) space
-
-	q.push(root);
-
-	while(!q.empty()) { // O(n) time
-		node *temp = q.front();
-		cout<<temp -> data<<" ";
-		q.pop();
-
-		if(temp->left != NULL)
-			q.push(temp->left);
-		
-		if(temp->right != NULL)
-			q.push(temp->right);
-	}
-}
-
 
 int height(node *root) {
 	if(root==NULL) return 0;
