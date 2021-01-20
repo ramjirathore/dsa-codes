@@ -22,6 +22,12 @@ public:
 	}
 };
 
+class Pair {
+public: 
+	int height;
+	int diameter;
+};
+
 node* buildTree() {
 	int d;
 	cin >> d;
@@ -48,7 +54,7 @@ int height(node *root) {
 }
 
 
-// O(n*n) time complexity and O(n) space
+// O(n*n) time and O(n) space
 int diameter(node *root) {
 	if(root == NULL) return 0;
 
@@ -62,11 +68,32 @@ int diameter(node *root) {
 	return max(opt1, max(opt2, opt3));  
 }
 
+// O(n) time (since we're simultaneously calculating height not separately like we did)
+Pair fastDiameter(node *root) {
+	Pair p;
+	if(root == NULL) {
+		p.height = 0;
+		p.diameter = 0;
+		return  p;
+	}
+
+	Pair left = fastDiameter(root->left);
+	Pair right = fastDiameter(root->right);
+
+	p.height = max(left.height, right.height) + 1;
+	p.diameter = max(left.height+right.height, max(left.diameter, right.diameter));
+
+	return p;
+}
+
 int main() {
 	node *root = buildTree();
 
-	cout<<"Diameter of Tree: "<<diameter(root);
+	// cout<<"Diameter of Tree: "<<diameter(root);
+	Pair p = fastDiameter(root);
 
+	cout<<"Height of Tree: "<< p.height<<endl;
+	cout<<"Diameter of Tree: "<< p.diameter;
 
 	return 0;
 }
