@@ -45,6 +45,9 @@ node* buildTree() {
 	return root;
 };
 
+// This can be done without creating a pair also
+// Just use a height variable and assign it -1 when unbalanced
+
 HBPair isHeightBalance(node *root) {
 
 	HBPair p;
