@@ -41,4 +41,39 @@ class Solution {
     }
 }
 
+// BETTER: O(nlogn) time and O(1)(if we are allowed to modify array) or O(n) (we will store copy) space
+// Sort the array - O(nlogn)
+// Traverse the array and find longestStreak 
+// if currentStreak breaks in between then reset the currentStreak to 1
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        
+        if(nums.size() == 0)  return 0;
+        
+        sort(nums.begin(), nums.end());
+
+        int longestStreak = 1;
+        int currentStreak = 1;
+        
+        for(int i = 1; i<nums.size(); i++) {
+            if (nums[i] != nums[i-1]) {
+                if (nums[i] == nums[i-1] + 1) {
+                    currentStreak += 1;
+                }
+                else {
+                    longestStreak = max(longestStreak, currentStreak);
+                    currentStreak = 1;
+                }
+            }
+        }
+        
+        return max(longestStreak, currentStreak);
+        
+    }
+};
+
+
+
 
