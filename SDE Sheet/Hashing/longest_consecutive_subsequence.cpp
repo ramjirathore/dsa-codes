@@ -77,3 +77,38 @@ public:
 
 
 
+// OPTIMAL: O(n) time and O(n) space
+// 1.Put all elements in hashSet
+// 2.Traverse each element and check if curr - 1 exists in array 
+// 3. If yes then move forward
+// 4. Else (this means you have reached minimal of a sequence) now search curr+1 and check if it exists,
+// maintain the count and update the max count when the curr doesn't exist
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        
+        set<int> hashSet; 
+        for(int x: nums) {
+            hashSet.insert(x);
+        }
+            
+        int longestStreak = 0;
+        
+        for(int val: nums) {
+            if(!hashSet.count(val-1)) {
+                int currentNum = val;
+                int currentStreak = 1;
+                while(hashSet.count(currentNum + 1)) {
+                    currentStreak++;
+                    currentNum++;
+                }
+                longestStreak = max(longestStreak, currentStreak);
+            }
+        }
+        
+        return longestStreak;
+        
+    }
+};
+
