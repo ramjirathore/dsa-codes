@@ -3,6 +3,20 @@ using namespace std;
 
 // Find max sum from any node to any node
 
+// Approach - 
+// We can have max sum from either -
+// left subtree , right subtree or passing throught root
+// If we observe then in the end (ie at the leaf) maxSum reaches to root 
+
+// To find maxSum we find (maxSumleft, maxRight, maxSumPassRoot);
+// for maxSumPassRoot ->
+// 1. just root data (leaf)
+// 2. leftBranchSum + rootData
+// 3. rightBranchSum + rootData
+// 4. leftBranchSum + rightBranchSum + rootData
+
+// Take max of all 4 options and thus we get maxSum passing through root
+
 
 class node {
 public: 
