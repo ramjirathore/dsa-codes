@@ -77,3 +77,23 @@ public:
     }
 };
 
+// Another Optimal - DFS O(n) time solution
+class Solution {
+public:
+    int diameter;
+    int dfs(TreeNode *root) {
+        if(root == NULL) return 0;
+        
+        int leftHeight = dfs(root->left);
+        int rightHeight = dfs(root->right);
+        
+        diameter = max(diameter, leftHeight+rightHeight);
+        
+        return max(leftHeight, rightHeight) + 1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        diameter = 0;
+        dfs(root);
+        return diameter;
+    }
+};
