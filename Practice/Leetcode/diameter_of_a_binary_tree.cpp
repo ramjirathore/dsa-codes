@@ -10,7 +10,7 @@
  * };
  */
 
-// BRUTE FORCE - 
+// BRUTE FORCE - O(n2) time and O(n) space
 class Solution {
 public:
     int height(TreeNode *root) {
@@ -43,3 +43,37 @@ public:
         
     }
 };
+
+
+// Optimized solution - O(n) time and O(n) space
+class Pair {
+    public: 
+        int h;
+        int d;
+};
+
+class Solution {
+public:
+    Pair dmt(TreeNode *root) {
+        Pair p;
+        if(root == NULL) {
+            p.h = -1;
+            p.d = 0;
+            return p;
+        }
+        
+        Pair ld = dmt(root->left);
+        Pair rd = dmt(root->right);
+        p.h = max(ld.h, rd.h) + 1;
+        
+        int rootd = ld.h + rd.h + 2;
+        p.d = max(rootd, max(ld.d, rd.d));
+        
+        return p;            
+    }
+    
+    int diameterOfBinaryTree(TreeNode* root) {
+        return dmt(root).d;
+    }
+};
+
