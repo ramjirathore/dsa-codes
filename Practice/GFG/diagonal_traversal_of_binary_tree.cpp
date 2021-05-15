@@ -47,3 +47,32 @@ vector<int> diagonal(Node *root)
     return ans;
 }
 
+
+// Iterative - O(n) time and < O(n) space
+// we set curr as front of queue
+// we print current root data 
+// then we push left child to queue if it exists
+// then we move current to its right child (since they are in same diagonal)
+// we do this until curr is not null
+vector<int> diagonal(Node *root)
+{
+    vector<int> ans;
+    queue<Node*> q;
+    
+    q.push(root);
+    
+    while(!q.empty()) {
+        Node* curr = q.front();
+        q.pop();
+        
+        while(curr) {
+            ans.push_back(curr->data);
+            if(curr->left) {
+                q.push(curr->left);
+            }
+            curr = curr->right;
+        }
+    }
+    return ans;
+}
+
