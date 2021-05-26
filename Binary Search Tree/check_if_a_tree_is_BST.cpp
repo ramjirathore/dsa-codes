@@ -17,7 +17,6 @@
 
 
 // OPTIMAL - #1 O(n) time and O(h) space
-
 // We can thus improve upon brute force by maintaining explicit min and max variables
 // We maintain the interval of min max to check if the current root's value lies in this interval
        
@@ -35,4 +34,39 @@ bool checkBST(Node *root, int min, int max) {
 bool isBST(Node* root) {
     return checkBST(root, INT_MIN, INT_MAX);
 }    
+
+// OPTIMAL - #2 O(n) time and O(h) space
+// This approach is based on the fact that inorder of binary search tree is sorted
+// If it is not then it is not a BST
+// But then we have to store in a array => extra space (along with recursion stack space)
+// Thus we can maintain a prev variable and keep checking everytime
+
+class Solution
+{
+    public:
+    
+
+    int prev = INT_MIN;
+    bool isBST(Node* root) 
+    {
+        if(root == NULL) {
+            return true;
+        }
+        
+        // if left side returns true then only we continue 
+        // Also as this call finishes our prev has been set
+        if(!isBST(root->left)) {
+            return false;
+        }
+        
+        // current value must be greater else return false
+        if(root->data <= prev) return false;
+        
+        prev = root->data;
+        
+        // Now it depends on the right side
+        return isBST(root->right);
+    }
+};
+
    
