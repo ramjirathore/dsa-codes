@@ -10,9 +10,10 @@
 // Then replace the original one with this one by reversing it.
 // This will work since the array we form is sorted one
 
-// OPTIMAL - O(nlogn) time and O(1) space
+// OPTIMAL - O(n) time and O(1) space
 // The idea is very simple we just heapify this current heap
 // Starting from the last internal node (ie n/2-1)
+// Basically we're building a max heap and building heap takes O(n) time
 
 // A C++ program to convert min Heap to max Heap
 #include<bits/stdc++.h>
