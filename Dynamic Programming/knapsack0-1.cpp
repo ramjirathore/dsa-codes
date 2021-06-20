@@ -77,3 +77,44 @@ class Solution
 };
 
 
+// OPTIMAL - O(N*W) time and space
+// From the (first) recursive code we will generate the bottom up approach / tabulation method which is iterative.
+
+
+// (Derived from the recursive code)
+int t[1001][1001];
+
+class Solution
+{
+    public:
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       // initialising the first row and columns
+       for(int i=0; i<n; i++) {
+           t[i][0] = 0;
+       }
+       
+       for(int j=0; j<W; j++) {
+           t[0][j] = 0;
+       }
+       
+       
+       // for remaining columns to find subproblems solution 
+       // i,j-> n,W 
+       for(int i=1; i<n+1; i++) {
+           for(int j=1; j<W+1; j++) {
+               if(wt[i-1] <= j) { // if we can make a choice ie either select or not select
+                   t[i][j] = max(val[i-1] + t[i-1][j-wt[i-1]], t[i-1][j]);
+               } else { // we can't select the item at all
+                   t[i][j] = t[i-1][j];
+               }
+           }
+       }
+       
+       // the last cell will have the answer
+       return t[n][W];
+    }
+};
+
+
