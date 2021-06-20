@@ -8,7 +8,7 @@
 // You cannot break an item, either pick the complete item or don’t pick it (0-1 property)
 
 
-// Approach one - O(2^N) time and O(1) extra space
+// BRUTE FORCE - O(2^N) time and O(1) extra space
 // This is simple recursive approach 
 // Basically for each element there are two possibilities -
 // 1. Its value is greater than W (capacity) - then we can't take it
@@ -37,4 +37,43 @@ class Solution
        }
     }
 };
+
+
+// OPTIMAL - O(N*W) time and space
+// We can break this question into subproblems and store the answer everytime in an matrix (dp)
+// When we need it then we can fetch it from dp matrix
+// Few changes in above code will lead us to TOP DOWN Approach / MEMOIZATION 
+
+// The size of matrix will be N+1, W+1
+int dp[1001][1001];
+
+class Solution
+{
+    public:
+    Solution() { // initialize the matrix with -1
+        memset(dp, -1, sizeof(dp));
+    }
+    
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       // no elements or no capacity    
+       if(n==0 or W==0) {
+           return 0;
+       }
+       
+       if(dp[n][W] != -1) {
+           return dp[n][W];
+       }
+       
+       if(wt[n-1] <= W) {
+           // either include it or don't
+           return dp[n][W] = max(val[n-1] + knapSack(W-wt[n-1], wt, val, n-1), knapSack(W, wt, val, n-1));
+       } else if(wt[n-1] > W) {
+           // can't include since its larger than capacity
+           return dp[n][W] = knapSack(W, wt, val, n-1);
+       }
+    }
+};
+
 
