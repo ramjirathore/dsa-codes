@@ -1,3 +1,6 @@
+// O(4*alpha) time ~ Constant time basically since aplha is almost 1
+// O(N) time 
+
 #include<bits/stdc++.h>
 using namespace std;
 
