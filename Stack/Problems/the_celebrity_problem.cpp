@@ -112,3 +112,40 @@ class Solution
 };
 
 
+
+// OPTIMAL (Assume an candidate) - O(N) time and O(1) space
+// Assume i is and celebrity and then just verify it
+// Verification - (If i is not the candidate itself and) If candidate knows anyone or somemone doesn't know candidate
+// Then he is not celeb for sure
+// Else he/she is!
+
+class Solution 
+{
+    public:
+    //Function to find if there is a celebrity in the party or not.
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        int candidate = 0;
+        
+        for(int i=0; i<n; i++) {
+            if(M[candidate][i] == 1) { 
+                // if candidate know i 
+                // then i is candidate
+                candidate = i;
+            }
+        }
+        
+        
+        // Verfiy if its celebrity or not
+        for(int i=0; i<n; i++) {
+            // if candidate is not himself
+            // and if he candidate know i or i doesn't candidate then for sure he is not celeb
+            if(candidate != i and (M[candidate][i] == 1 or M[i][candidate] == 0)) {
+                return -1;
+            }
+        }
+        
+        // else he is return the candidate
+        return candidate;
+    }
+};
