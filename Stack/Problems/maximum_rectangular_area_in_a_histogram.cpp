@@ -43,3 +43,72 @@ class Solution
     }
 };
 
+
+// OPTIMAL - O(N) time and O(N) space
+// Find nearest smallest number/index on left of each number 
+// Find nearest smallest number/index on right of each number
+
+class Solution
+{
+    public:
+    //Function to find largest rectangular area possible in a given histogram.
+    long long getMaxArea(long long arr[], int n)
+    {
+        stack<int> s;
+        
+        int pseudoIndex = n;
+        
+        // find next smallest element in right for each element (NSR)
+        vector<long long> right(n, 0);
+        
+        
+        for(int i=n-1; i>=0; i--) {
+            while(!s.empty() and arr[i] <= arr[s.top()]) {
+                s.pop();
+            }
+                    
+            if(s.empty()) {
+                right[i] = pseudoIndex;
+            } else {
+                right[i] = s.top();
+            }
+            s.push(i);
+        }
+        
+        // empty the stack
+        while(!s.empty()) {
+            s.pop();
+        }
+        
+        // change the pseudoIndex
+        pseudoIndex = - 1;
+        
+        // find next smallest element in left for each element (NSL)
+        vector<long long> left(n, 0);
+        
+        for(int i=0; i<n; i++) {
+           = while(!s.empty() and arr[i] <= arr[s.top()]) {
+                s.pop();
+            }
+                    
+            if(s.empty()) {
+                left[i] = pseudoIndex;
+            } else {
+                left[i] = s.top();
+            }
+            s.push(i);
+        }
+        
+        // Now we know the left smallest and right smallest element for each element
+        // We can now get the width using these
+        long long max_area = 1;
+        
+        for(int i=0; i<n; i++) {
+            long long width = right[i] - (left[i] + 1);
+    
+            max_area = max(max_area, arr[i] * width);
+        }
+       
+        return max_area;
+    }
+};
