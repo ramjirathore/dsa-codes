@@ -43,3 +43,66 @@ bool static comparator(pair<int, int> a, pair<int, int> b) {
         
     }
 };
+
+
+
+// UPDATE - 
+// If asked which meeting will happen first
+// Store position also
+
+class Solution
+{
+    struct meeting {
+        int start;
+        int end;
+        int pos;
+        
+        meeting(int s, int e, int p) {
+            start = s;
+            end = e;
+            pos = p;
+        }
+    };
+    
+    static bool comparator(meeting m1, meeting m2) {
+        if(m1.end == m2.end) {
+            return m1.pos < m2.pos;
+        }
+        
+        return m1.end < m2.end;
+    }
+    
+    public:
+    
+    int maxMeetings(int start[], int end[], int n)
+    {
+        vector<meeting> meets;
+        
+        // store all meetings in vector of meetings
+        // along with positions
+        for(int i=0; i<n; i++) {
+            meets.push_back(meeting(start[i], end[i], i+1));
+        }
+        
+        // sort them on basis on end time
+        // if end time same then sort on basis of position
+        sort(meets.begin(), meets.end(), comparator);
+        
+        
+        vector<int> res;
+        int lastEnd = -1; // start with min value
+        
+        for(int i=0; i<n; i++) {
+            // if current meeting's
+            // start time is greater than last ended meeting time
+            // then we can have this meeting
+            if(meets[i].start > lastEnd) {
+                lastEnd = meets[i].end;
+                res.push_back(meets[i].pos);
+            }
+        }
+        
+        
+        return res.size();
+    }
+};
