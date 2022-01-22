@@ -31,3 +31,33 @@ int maxLen(int arr[], int n)
     }
     return max_len;
 }
+
+
+// OPTIMAL SOLUTION - O(n) time and O(n) space
+// Save sum as you forward and if the sum comes again then this means that the elements between adds to zero.
+// Hence update the max length and if the sum came first time then add it to map.
+class Solution{
+    public:
+    int maxLen(vector<int>&A, int n)
+    {   
+        unordered_map<int, int> mp;
+        mp[0] = -1;
+        
+        int sum = 0;
+        int len = 0;
+        
+        
+        for(int i=0; i<n; i++) {
+            sum += A[i];
+            
+            if(mp.count(sum)) {
+               len = max(len, i - mp[sum]); 
+            } else {
+                mp.insert({sum, i});
+            }
+        }
+        
+        
+        return len;
+    }
+};
