@@ -38,3 +38,29 @@ int findSubArray(int arr[], int n)
     return maxsize;
 }
 
+
+// OPTIMAL - O(n) time and space
+// We will use the same technique to find largest array where sum is zero
+// How? Just replace 0 by -1 and then find the length whenever the sum is found again.
+// Why this works? Because when the sum is same this means there are equal no.s of zeroes and one's
+
+int maxLen(int arr[], int N){
+   // sum and index
+   unordered_map<int, int> mp;
+   mp[0] = -1;
+   
+   int res = 0;
+   int sum = 0;
+   
+   for(int i=0; i<N; i++) {
+       sum += arr[i] == 0 ? -1: 1;
+       
+       if(mp.count(sum)) {
+           res = max(res, i - mp[sum]);
+       } else {
+           mp[sum] = i; 
+       }
+   }
+   
+   return res;
+}
